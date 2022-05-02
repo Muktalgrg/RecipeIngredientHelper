@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div style="padding:20px">
+        
+        <img src="{{recipe.photoUrl}}" width="300px" height="200px" />
+        <h2>Name: {{recipe.name}}</h2>
+        <table  *ngIf="recipe.ingredients" class="table table-bordered table-striped table-hover table-responsive-xl" style="max-width: 300px;">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Ingredient</th>
+                </tr>								
+            </thead>
+            <tbody>
+                <i class="fas fa-portrait"></i>
+        
+                <tr  *ngFor="let ingredient of recipe.ingredients">
+                    <td>{{ingredient.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" (click)="matchFinder(recipe.id)">Select for match</button>
+        <p>Process: <br/></p>
+        <p style="margin-bottom: 2rem;white-space:pre-wrap; background-color: lightblue">{{recipe.description}}</p>
+
+    </div>
+</div>

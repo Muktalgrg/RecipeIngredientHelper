@@ -1,0 +1,93 @@
+<div class="container-fluid text-center">
+    <div>
+        <img src="/assets/images/logo.png" height="70px" style="padding: 10px;"/>
+    </div>
+
+    <form *ngIf="!isLoggedIn" [formGroup]="registerForm" style="width: 500px;  margin: 0px auto" (ngSubmit) = "onSubmit()" >
+        <div class="border border-secondary rounded p-3" >
+            <p>Register new user</p>
+            <div class="form-group row">
+                    <div class="col-sm-3">
+                        <label>First name: </label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input formControlName="firstName" name="email"  class="form-control" />
+                        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger mt-1">
+                            <div *ngIf="firstName.errors.required || firstName.errors.notOnlyWhitespace">
+                                firstName is required
+                            </div> 
+                            <div *ngIf="firstName.errors.minlength || firstName.errors.maxlength">
+                                firstName must be between 2 to 128 characters.
+                            </div>
+                            <div *ngIf="firstName.errors.pattern">
+                                firstName enter valid email
+                            </div>
+                            
+                        </div>
+                    </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <label>Last name: </label>
+                </div>
+                <div class="col-sm-9">
+                    <input formControlName="lastName" name="lastName"  class="form-control" />
+                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger mt-1">
+                        <div *ngIf="lastName.errors.required || lastName.errors.notOnlyWhitespace">
+                            last Name is required
+                        </div> 
+                        <div *ngIf="lastName.errors.minlength || lastName.errors.maxlength">
+                            last Name must be between 2 to 128 characters.
+                        </div>
+                        <div *ngIf="lastName.errors.pattern">
+                            last Name enter valid email
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="form-group row">
+                <div class="col-sm-3">
+                    <label>Email: </label>
+                </div>
+                <div class="col-sm-9">
+                    <input formControlName="email" name="email" type="email" class="form-control" />
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger mt-1">
+                        <div *ngIf="email.errors.required || email.errors.notOnlyWhitespace">
+                            email is required
+                        </div> 
+                        <div *ngIf="email.errors.minlength || email.errors.maxlength">
+                            email must be between 2 to 128 characters.
+                        </div>
+                        <div *ngIf="email.errors.pattern">
+                            email enter valid email
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <label>password: </label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="password" formControlName="password" name="password"  class="form-control" />
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger mt-1">
+                        <div *ngIf="password.errors.required || password.errors.notOnlyWhitespace">
+                            password is required
+                        </div> 
+                        <div *ngIf="password.errors.minlength || password.errors.maxlength">
+                            password must be between 2 to 128 characters.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="col-sm-3-offset col-sm-9">
+                <button class="btn btn-primary " type="submit"> Submit </button>
+            </p>
+        </div>
+
+    </form>
+
+</div>

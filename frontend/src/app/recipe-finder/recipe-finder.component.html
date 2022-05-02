@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div style="padding:20px">
+        <h3>Selected recipe</h3>
+        <img src="{{selectedRecipe.photoUrl}}" width="300px" height="200px" />
+        <h5>{{selectedRecipe.name}}</h5>
+    </div>
+    <hr/>
+
+    <h3>Matched Recipe</h3>
+    <div class="row">
+
+        <div *ngFor="let recipe of matchedRecipe">
+            <div class="col-sm-6">
+                <a routerLink="/recipes/{{recipe.id}}">
+                    <img src="{{recipe.photoUrl}}" alt="{{recipe.name}}"  width="300px" height="200px"/>
+                    <p>Name: {{recipe.name}}</p>
+                </a>
+                
+            </div>   
+        </div>
+    </div>
+
+
+    <h3>Shopping List</h3>
+
+    <table  *ngIf="ingredientList?.length!= 0" class="table table-bordered table-striped table-hover table-responsive-xl" style="max-width: 500px;">
+        <thead class="thead-dark">
+            <tr>
+                <th>Ingredient</th>
+                <th>Action</th>
+            </tr>								
+        </thead>
+        <tbody>
+            <i class="fas fa-portrait"></i>
+    
+            <tr  *ngFor="let ingredient of ingredientList">
+                <td>{{ingredient}}</td>
+                <td><button class="btn btn-danger" (click)="removeItem(ingredient)">Remove</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" (click)="downloadList()" >Download list</button>
+    <div *ngIf="ingredientList?.length == 0" class="alert alert-warning col-md-12" role="alert">
+        No ingredient found.
+
+
+
+
+</div>

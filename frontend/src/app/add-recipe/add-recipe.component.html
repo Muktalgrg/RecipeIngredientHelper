@@ -1,0 +1,165 @@
+<form [formGroup]="recipeForm"(ngSubmit)="onSubmit()" style="max-width: 800px; margin: 30px" enctype="multipart/form-data" >
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label  ">Recipe name</label>
+        <div class="col-sm-8">
+            <input formControlName="name" type="text" class="form-control"/>
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="name.errors.required || name.errors.notOnlyWhitespace">
+                    name of recipe is required
+                </div> 
+                <div *ngIf="name.errors.minlength || name.errors.maxlength">
+                    name of recipe must be between 2 to 128 characters.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-6">Ingredient</label>
+        <label class="col-sm-6">Select category</label>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-6" formArrayName="ingredients" >
+            <div *ngFor="let ingredientControl of ingredients.controls; let i = index">
+                <input class="form-control"   type="text" [formControlName] = "i" >
+                <br/>
+                <div *ngIf="ingredientControl.invalid && (ingredientControl.dirty || ingredientControl.touched)" class="alert alert-danger mt-1">
+                    <div *ngIf="ingredientControl.errors.required || ingredientControl.errors.notOnlyWhitespace">
+                        name of recipe is required
+                    </div>  
+                    <div *ngIf="ingredientControl.errors.minlength || ingredientControl.errors.maxlength">
+                        name of recipe must be between 2 to 128 characters.
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+        <div class="col-sm-6" formArrayName = "category">
+            <div *ngFor="let categoryControl of category.controls; let i = index">
+                <select [formControlName]="i" class="form-control" >
+                    <option [value]="0">Vegetable</option>
+                    <option  [value]="1">Condiment</option>
+                    <option [value]="2">Meat</option>
+                    <option [value]="3">Spices</option>  
+                    <option [value]="4" >Others</option>                
+                </select>
+                <br/>
+                <div *ngIf="categoryControl.invalid && (categoryControl.dirty || categoryControl.touched)" class="alert alert-danger mt-1">
+                    <div *ngIf="categoryControl.errors.required">
+                        category name is required
+                    </div> 
+                </div>  
+
+            </div>
+        </div>
+
+    </div>
+    <input type="button" class="btn btn-primary" value="Add More Ingredients" (click)="onAddIngredients()"/>
+
+    
+
+    <!-- <div class="form-group row">
+        <label class="col-sm-4 col-form-label  ">Ingredients</label>
+        <div formArrayName="ingredients" class="col-sm-8">
+            <div>
+
+                <div  class="col-sm-4" *ngFor="let ingredientControl of ingredients.controls; let i= index" >
+                    <input type="text" [formControlName]="i"   class="form-control"/>
+                    <br/>
+                    
+                    <div *ngIf="ingredientControl.invalid && (ingredientControl.dirty || ingredientControl.touched)" class="alert alert-danger mt-1">
+                        <div *ngIf="ingredientControl.errors.required || ingredientControl.errors.notOnlyWhitespace">
+                            name of recipe is required
+                        </div>  
+                        <div *ngIf="ingredientControl.errors.minlength || ingredientControl.errors.maxlength">
+                            name of recipe must be between 2 to 128 characters.
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-sm-4" *ngFor="let categoryControl of category.controls; let i = index">
+                    <label for="exampleFormControlSelect1">Category select</label>
+                    <select [formControlName]="i" class="form-control" id="exampleFormControlSelect1">
+                        <option [value]="0">Vegetable</option>
+                        <option  [value]="1">Condiment</option>
+                        <option [value]="2">Meat</option>
+                        <option [value]="3">Spices</option>                    
+                    </select>
+                    <div *ngIf="category.invalid && (category.dirty || category.touched)" class="alert alert-danger mt-1">
+                        <div *ngIf="category.errors.required">
+                            category is required
+                        </div> 
+                    </div>
+                </div>
+            </div>
+          
+            <input type="button" class="btn btn-primary" value="Add More Ingredients" (click)="onAddIngredients()"/>
+        </div>
+    </div>  -->
+
+    <div class="form-group">
+        <div class="row">
+            <label for="fileImage" class="col-sm-4 col-form-label">Photo</label>
+            <div class="col-sm-8">
+                <input type="file" id="fileImage" name="image" accept="image/jpeg, image/png" (change)="onFileChanged($event)" class="mb-2">
+            </div>
+        </div>
+        <div class="row">
+
+        <div class=" col-sm-8 offset-sm-4">
+                
+                <img  alt="Photos preview" class="img-fluid" [src]="displayImage" width="300" height="80" />
+                
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label ">Description</label>
+        <div  class="col-sm-8">
+            <textarea type="textarea" formControlName="description" cols="30" rows="10" class="form-control" placeholder="Add process here">
+            </textarea>
+            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="description.errors.required || description.errors.notOnlyWhitespace">
+                    description of process is required
+                </div>  
+                <div *ngIf="description.errors.minlength || description.errors.maxlength">
+                    description of process is required must be between 2 to 65535 characters.
+                </div>
+            </div> 
+
+        </div>
+    </div>
+
+    
+
+    
+
+
+    <!-- <div formArrayName="ingredients">
+
+    </div> -->
+    <input type="submit" value="Submit" class="btn btn-primary" />
+</form>
+
+
+<!-- <form [formGroup]="recipeForm"(ngSubmit)="onSubmit()" >
+    <div class="container">
+        <div formArrayName="hobbies">
+            <h4>Your hobbies</h4>
+            <button class="btn btn-primary" type="button" (click)="onAddHobby()"> Add Hobby</button>
+            <div class="form-group" *ngFor="let hobbyControl of hobbies.controls; let i = index">
+                    <input type="text" class="form-control" [formControlName]="i" >
+                    <div *ngIf="hobbyControl.invalid && (hobbyControl.dirty || hobbyControl.touched)" class="alert alert-danger mt-1">
+                        <div *ngIf="hobbyControl.errors.required">
+                            hobby name is required
+                        </div> 
+                    </div>
+            </div>
+        
+        </div>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary" />
+</form> -->

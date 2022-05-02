@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <img class="navbar-brand" src="assets/images/logo.png" style="height: 40px; "/>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active-link">Home</a>
+          </li>
+
+          <li class="nav-item" *ngIf="isAdmin" >
+            <a class="nav-link" routerLink="/addRecipe" routerLinkActive="active-link">Add recipe</a>
+          </li>
+          <li class="nav-item" *ngIf="isAdmin" >
+            <a class="nav-link" routerLink="/addIngredient" routerLinkActive="active-link">Add Ingredient</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+					<li class="nav-item">
+					  <a href="/users" class="nav-link" routerLink="/users">{{ loggedInUserFirstName }}</a>
+					</li>
+					<li class="nav-item">
+					  <a href class="nav-link" (click)="logout()">LogOut</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+					<li class="nav-item">
+						<a href="#" routerLink="login" class="nav-link">SignIn</a>
+					</li>
+          <li class="nav-item">
+						<a href="#" routerLink="register" class="nav-link">Register</a>
+					</li>
+				</ul>
+
+
+
+      </div>
+    </nav>
+
+    <div>
+      <!-- <h1>MyShop Control Panel</h1>	 -->
+      <router-outlet></router-outlet>
+    </div>
+    
+    <div class="text-center">
+      <p> Control Panel - Copyright &copy; Recipe Ingredient Helper</p>
+    </div>
+
+
+  </div>
+
+
+</div>

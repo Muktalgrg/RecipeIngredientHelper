@@ -1,0 +1,58 @@
+<form [formGroup]="ingredientForm" style="padding: 20px"  (ngSubmit)="onSubmit()">
+    <div >
+        <div class="col-xs-6 col-md-6 col-lg-6">
+            <div  class="form-group">
+                <label for="ingredient">Ingredient name</label>
+                <input formControlName="name" type="text" class="form-control" id="ingredient" />
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger mt-1">
+                    <div *ngIf="name.errors.required || name.errors.notOnlyWhitespace">
+                        ingredient name is required
+                    </div> 
+                </div>
+
+            </div>
+        </div>
+       
+        <div class="col-sx-6 col-md-6 col-lg-6">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Category select</label>
+                <select formControlName="category" class="form-control" id="exampleFormControlSelect1">
+                    <option [value]="0">Vegetable</option>
+                    <option  [value]="1">Condiment</option>
+                    <option [value]="2">Meat</option>
+                    <option [value]="3">Spices</option>       
+                    <option [value]="4">Others</option>             
+                </select>
+                <div *ngIf="category.invalid && (category.dirty || category.touched)" class="alert alert-danger mt-1">
+                    <div *ngIf="category.errors.required">
+                        category name is required
+                    </div> 
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <input type="submit" value="save" class="btn btn-primary m-3"/>
+
+  </form>
+
+  <hr/>
+
+  <table   class="table table-bordered table-striped table-hover table-responsive-xl">
+    <thead class="thead-dark">
+        <tr>
+            <th>Ingredient ID</th>
+            <th>Name</th>
+            <th>Category</th>
+        </tr>								
+    </thead>
+    <tbody>
+        <i class="fas fa-portrait"></i>
+
+        <tr  *ngFor="let ingredient of ingredientList">
+            <td>{{ingredient.id}}</td>
+            <td>{{ingredient.name}}</td>
+            <td>{{ingredient.category}}</td>
+        </tr>
+    </tbody>
+</table>

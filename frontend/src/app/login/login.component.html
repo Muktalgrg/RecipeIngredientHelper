@@ -1,0 +1,77 @@
+<div class="container-fluid text-center">
+    <div>
+        <img src="/assets/images/logo.png"  height="70px" style="padding: 10px;" />
+    </div>
+
+    <form *ngIf="!isLoggedIn" [formGroup]="signForm" style="width: 350px;  margin: 0px auto" (ngSubmit) = "onSubmit()" >
+        <div class="border border-secondary rounded p-3" >
+            <p>Access to MyShop Control Panel</p>
+            <div class="form-group">
+                <input formControlName="email" type="email" name="email" placeholder="email" class="form-control" />
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger mt-1">
+                    <div *ngIf="email.errors.required || email.errors.notOnlyWhitespace">
+                        Email is required
+                    </div> 
+                    <div *ngIf="email.errors.minlength || email.errors.maxlength">
+                        Email must be between 9 to 128 characters.
+                    </div>
+                    <div *ngIf="email.errors.pattern">
+                        Please enter valid email
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="form-group">
+                <input type="password" formControlName="password"  name="password" placeholder="password" class="form-control"  />
+                <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger mt-1">
+                    <div *ngIf="password.errors.required || password.errors.notOnlyWhitespace">
+                         password is required
+                    </div> 
+                    <div *ngIf="password.errors.minlength || password.errors.maxlength">
+                        password must be between 5 to 45 characters.
+                    </div>
+                </div>
+            </div>
+            <p>
+                <button class="btn btn-primary"> Submit </button>
+            </p>
+
+
+
+        </div>
+
+
+    </form>
+
+    <h2 *ngIf="isLoggedIn">Welcome to recipe ingredient helper app</h2>
+
+
+
+
+</div>
+
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{modelHeaderMessage}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{modelBodymessage}}</p>
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" 
+                (click)="closePopup(redirectFlag)">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

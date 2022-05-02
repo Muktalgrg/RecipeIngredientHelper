@@ -1,0 +1,19 @@
+<div class="row" style="padding: 30px; " >
+    <div *ngFor="let recipe of recipeList; let i=index">
+        <div class="col-sm-8" style="padding: 10px; " >
+            <a routerLink="/recipes/{{recipe.id}}">
+                <img src="{{recipe.photoUrl}}" alt="{{recipe.name}}"  width="300px" height="200px"/>
+                <p>Name: {{recipe.name}}</p>
+            </a>
+            <button class="btn btn-primary" (click)="matchFinder(recipe.id)" >Select for match</button>
+            <br>
+            
+        </div>
+        
+    </div>
+    <div *ngIf="recipeList?.length == 0" class="alert alert-warning col-md-12" role="alert">
+        No products found.
+
+</div>
+</div>
+
