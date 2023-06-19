@@ -22,7 +22,7 @@ import java.util.Set;
 @RequestMapping("/recipes")
 public class RecipeController {
 
-    public static final String IMAGE_FOLDER_LOCATION = System.getProperty("user.home") + "/RecipeIngredientHelper/frontend/src/assets/images";
+//    public static final String IMAGE_FOLDER_LOCATION = System.getProperty("user.home") + "/RecipeIngredientHelper/frontend/src/assets/images";
 
     private RecipeService recipeService;
 
@@ -34,6 +34,7 @@ public class RecipeController {
     @GetMapping("/list")
 //    @PreAuthorize("hasAnyRole('USER', 'USER_ROLE', 'ROLE_USER', 'user', 'role_user')")
     public List<Recipe> getAllRecipe(){
+    	
         return this.recipeService.getAllRecipe();
     }
 
@@ -42,20 +43,41 @@ public class RecipeController {
         return this.recipeService.getRecipeById(id);
     }
 
-    @PostMapping("/save")
-    @ResponseStatus(HttpStatus.CREATED)
+    /*
+     * 
+//    @PostMapping("/save")
+//    @ResponseStatus(HttpStatus.CREATED)
     public Recipe saveRecipe(@RequestParam("name") String name,
 //                           @RequestParam("ingredients")String ingredients,
                            @RequestParam(name = "image", required = false)MultipartFile multipartFile,
                            @RequestParam("description")String description) throws IOException {
 
 //        Set<Ingredient> ingredientList = new ObjectMapper().readValue(ingredients, new TypeReference<Set<Ingredient>>(){});
-        System.out.println(IMAGE_FOLDER_LOCATION);
 
         Recipe recipe = Recipe.builder().name(name.trim())
                 .description(description.trim()).build();
 
         return this.recipeService.saveRecipe(recipe, multipartFile);
+    }
+    
+    */
+    
+    @PostMapping("/save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Recipe saveRecipe1(@RequestParam("name") String name,
+//                           @RequestParam("ingredients")String ingredients,
+                           @RequestParam(name = "image", required = false)MultipartFile multipartFile,
+                           @RequestParam("description")String description) throws IOException {
+
+//        Set<Ingredient> ingredientList = new ObjectMapper().readValue(ingredients, new TypeReference<Set<Ingredient>>(){});
+//    	ingredients are saved using different API.
+    	
+        Recipe recipe = Recipe.builder().name(name.trim())
+                .description(description.trim()).build();
+        
+        
+
+        return this.recipeService.saveRecipe1(recipe, multipartFile);
     }
 
 

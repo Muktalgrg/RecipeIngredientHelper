@@ -12,9 +12,9 @@ import java.util.Optional;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
-    @Modifying
-    @Query("update Recipe r set r.photoUrl = :photoUrl WHERE r.id = :recipeId")
-    void setRecipePhotoUrl(@Param("photoUrl") String photoUrl, @Param("recipeId") Long recipeId);
+//    @Modifying
+//    @Query("update Recipe r set r.photoUrl = :photoUrl WHERE r.id = :recipeId")
+//    void setRecipePhotoUrl(@Param("photoUrl") String photoUrl, @Param("recipeId") Long recipeId);
 
     Optional<Recipe> findByName(String name);
 

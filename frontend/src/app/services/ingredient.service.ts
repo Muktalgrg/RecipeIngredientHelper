@@ -7,7 +7,9 @@ import { Ingredient } from '../common/ingredient';
   providedIn: 'root'
 })
 export class IngredientService {
+  // private baseUrl = 'http://recipeingredienthelper-env.eba-kmynniwm.ap-southeast-2.elasticbeanstalk.com/rih';
   private baseUrl = 'http://localhost:8080/rih';
+
 
   constructor(private httpClient: HttpClient) { }
 

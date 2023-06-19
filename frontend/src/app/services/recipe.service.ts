@@ -7,7 +7,9 @@ import { Recipe } from '../common/recipe';
   providedIn: 'root'
 })
 export class RecipeService {
+  // private baseUrl = 'http://recipeingredienthelper-env.eba-kmynniwm.ap-southeast-2.elasticbeanstalk.com/rih';
   private baseUrl = 'http://localhost:8080/rih';
+
   
   constructor(private httpClient: HttpClient) { }
 
@@ -30,11 +32,14 @@ export class RecipeService {
 
   
   createRecipeFormData(recipeData: Recipe, uploadedImage: any): FormData {
+    console.log(recipeData+" "+ uploadedImage);
     const formData = new FormData();
     formData.append('name', recipeData.name);
     // formData.append('ingredients', JSON.stringify(recipeData.ingredients));
     formData.append('image', uploadedImage);
     formData.append('description', recipeData.description);
+
+    console.log(formData);
 
 
     return formData;

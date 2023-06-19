@@ -1,7 +1,10 @@
 <div class="container-fluid">
     <div style="padding:20px">
         <h3>Selected recipe</h3>
-        <img src="{{selectedRecipe.photoUrl}}" width="300px" height="200px" />
+        
+        
+        <img  alt="Photos preview" class="img-fluid" [src]="transform(selectedRecipeImage)" width="300px" height="200px" />
+
         <h5>{{selectedRecipe.name}}</h5>
     </div>
     <hr/>
@@ -12,7 +15,7 @@
         <div *ngFor="let recipe of matchedRecipe">
             <div class="col-sm-6">
                 <a routerLink="/recipes/{{recipe.id}}">
-                    <img src="{{recipe.photoUrl}}" alt="{{recipe.name}}"  width="300px" height="200px"/>
+                    <img [src]="transform(recipe['fileDb'].data)"  width="300px" height="200px"/>
                     <p>Name: {{recipe.name}}</p>
                 </a>
                 

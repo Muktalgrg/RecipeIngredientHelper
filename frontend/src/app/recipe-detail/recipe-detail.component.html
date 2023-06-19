@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div style="padding:20px">
-        
-        <img src="{{recipe.photoUrl}}" width="300px" height="200px" />
         <h2>Name: {{recipe.name}}</h2>
+        <img  alt="Photos preview" class="img-fluid" [src]="transform(selectedImage)" width="300" height="80" />
+        <hr/>
         <table  *ngIf="recipe.ingredients" class="table table-bordered table-striped table-hover table-responsive-xl" style="max-width: 300px;">
             <thead class="thead-dark">
                 <tr>

@@ -11,6 +11,7 @@ import java.util.Set;
 public interface RecipeService {
 
     Recipe saveRecipe(Recipe recipe, MultipartFile multipartFile) throws IOException;
+    Recipe saveRecipe1(Recipe recipe, MultipartFile multipartFile) throws IOException;
     List<Recipe> getAllRecipe();
 
     Recipe getRecipeById(Long id);

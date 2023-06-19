@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../common/recipe';
 import { RecipeService } from '../services/recipe.service';
@@ -11,9 +12,11 @@ import { RecipeService } from '../services/recipe.service';
 export class RecipeDetailComponent implements OnInit {
 
   recipe: Recipe = new Recipe();
+  selectedImage: string;
 
   constructor(private router: Router,
-          private recipeService: RecipeService, private route: ActivatedRoute) { }
+          private recipeService: RecipeService, private route: ActivatedRoute,
+          private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -27,6 +30,10 @@ export class RecipeDetailComponent implements OnInit {
       this.recipeService.getRecipeById(recipeId).subscribe(
         data =>{
           this.recipe = data;
+          console.log(this.recipe);
+          // this.recipe.fileDB.data = ""
+          this.selectedImage = "data:"+ this.recipe['fileDb'].type+";base64, "+this.recipe['fileDb'].data;
+
         }
       );
 
@@ -35,6 +42,10 @@ export class RecipeDetailComponent implements OnInit {
     matchFinder(id: number){
       // console.log("id clicked: ",id);
       this.router.navigateByUrl(`/match/${id}`);
+    }
+
+    transform(image: string){
+      return this.sanitizer.bypassSecurityTrustResourceUrl(image);
     }
 
 }

@@ -54,9 +54,22 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.registerForm.value).subscribe(
       data =>{
         console.log(data);
+        alert("User sucessfully registered!")
+        // user registration successfull.
+        // reload page or redirect to login page.
+        this.reloadPage();
+      },
+      err =>{
+        console.log("error msg from server: "+err.error.message);
+        alert(err.error.message);
       }
     );
 
   }
+  reloadPage(): void{
+    window.location.reload();
+  }
+
+  
 
 }

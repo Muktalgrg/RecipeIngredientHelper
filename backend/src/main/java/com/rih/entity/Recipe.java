@@ -35,8 +35,19 @@ public class Recipe {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(length = 128)
-    private String photoUrl;
+//    @Column(length = 128)
+//    private String photoUrl;
+    
+    
+//    @Lob
+//    private byte[] imageData;
+    
+    // image information
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="file_db_id")
+    private FileDB fileDb;
+    
+    
 
     public void add(Ingredient ingredient){
         if(ingredient != null){

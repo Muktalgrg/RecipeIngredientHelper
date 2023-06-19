@@ -61,7 +61,7 @@ public class AuthController {
                 .collect(Collectors.toList());
 
         LOGGER.info("User signin successful!");
-        System.out.println("token: "+jwt);
+//        System.out.println("token: "+jwt);
 
 
 

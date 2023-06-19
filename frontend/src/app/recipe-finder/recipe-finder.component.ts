@@ -4,6 +4,7 @@ import { Ingredient } from '../common/ingredient';
 import { Recipe } from '../common/recipe';
 import { RecipeService } from '../services/recipe.service';
 import * as fileSaver from 'file-saver';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-recipe-finder',
@@ -12,11 +13,13 @@ import * as fileSaver from 'file-saver';
 })
 export class RecipeFinderComponent implements OnInit {
   selectedRecipe: Recipe = new Recipe();
+  selectedRecipeImage: string;
   matchedRecipe: Recipe[] = [];
   ingredientList: String[] = [];
 
   constructor(private route: ActivatedRoute,
-              private recipeService: RecipeService) { }
+              private recipeService: RecipeService,
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -31,8 +34,9 @@ export class RecipeFinderComponent implements OnInit {
       this.recipeService.getRecipeById(recipeId).subscribe(
         data =>{
           this.selectedRecipe = data;
+          this.selectedRecipeImage = "data:"+this.selectedRecipe["fileDb"].type+";base64, "+this.selectedRecipe["fileDb"].data;
+
           this.setMatchedRecipe();
-        // console.log(this.selectedRecipe);
       }
     );
   }
@@ -41,6 +45,11 @@ export class RecipeFinderComponent implements OnInit {
     this.recipeService.getMatchedRecipe(JSON.stringify(this.selectedRecipe.ingredients)).subscribe(
       data =>{
         this.matchedRecipe = data;
+        this.matchedRecipe.forEach(recipe =>{
+          recipe["fileDb"].data = "data:"+recipe["fileDb"].type+";base64, "+recipe["fileDb"].data;
+
+        });
+
         console.log("data", data);
         this.setIngredientList();
       }
@@ -89,6 +98,9 @@ export class RecipeFinderComponent implements OnInit {
     fileSaver.saveAs(blob, 'shoppingList.txt');
 
 
+  }
+  transform(image: string){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(image);
   }
 
 

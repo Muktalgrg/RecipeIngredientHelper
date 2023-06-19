@@ -128,14 +128,17 @@ export class AddRecipeComponent implements OnInit {
 
     this.recipeService.saveRecipe(imageFormData).subscribe({
       next: response =>{
-        // console.log(response);
+        console.log(response);
         // console.log("response id : ", response.id);
+        // 1. save recipe
+        // 2. Then after call api to save ingredients!
         this.ingredientService.saveIngredients(JSON.stringify(ingredientList), response.id).subscribe({
           next: response =>{
             this.recipeForm.reset();
             this.router.navigateByUrl('/home');
           },
           error: err =>{
+
             alert(err.error);
           }
         });

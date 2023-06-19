@@ -8,7 +8,11 @@ import { LoginRequest } from '../common/login-request';
   providedIn: 'root'
 })
 export class AuthService {
-  private AUTH_API = 'http://localhost:8080/rih/api/auth';
+
+  // ROOT_URL:String = 'http://recipeingredienthelper-env.eba-kmynniwm.ap-southeast-2.elasticbeanstalk.com/';
+  ROOT_URL:String = 'http://localhost:8080/';
+
+  private AUTH_API = this.ROOT_URL+'rih/api/auth';
   private httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   }; 
