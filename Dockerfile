@@ -1,8 +1,8 @@
 FROM openjdk:17-alpine
 
-EXPOSE 8080
+EXPOSE 8081
 
-COPY ./target/java-maven-app-*.jar /usr/app/
+COPY ./target/RecipeIngredientHelper-*.jar /usr/app/
 WORKDIR /usr/app
 
 CMD java -jar java-maven-app-*.jar
