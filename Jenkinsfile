@@ -36,7 +36,9 @@ pipeline {
                 script {
                     echo "building the docker image..."
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh "docker build --platform linux/amd64 -t muktagurung/recipe-ingredient-helper:${IMAGE_NAME} ."
+                        sh "docker build -t muktagurung/recipe-ingredient-helper:${IMAGE_NAME} ."
+
+                        // sh "docker build --platform linux/amd64 -t muktagurung/recipe-ingredient-helper:${IMAGE_NAME} ."
                         sh "echo $PASS | docker login -u $USER --password-stdin"
                         sh "docker push muktagurung/recipe-ingredient-helper:${IMAGE_NAME}"
                     }  
