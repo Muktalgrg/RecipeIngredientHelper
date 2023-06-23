@@ -30,20 +30,20 @@ pipeline {
                 }
             }
         }
-        /*
+        
         stage('build image') {
             steps {
                 script {
                     echo "building the docker image..."
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh "docker build -t muktagurung/demo-app:${IMAGE_NAME} ."
+                        sh "docker build -t muktagurung/recipeIngredientHelper:${IMAGE_NAME} ."
                         sh "echo $PASS | docker login -u $USER --password-stdin"
-                        sh "docker push muktagurung/demo-app:${IMAGE_NAME}"
+                        sh "docker push muktagurung/recipeIngredientHelper:${IMAGE_NAME}"
                     }  
                 }   
             }
         }
-        */
+        
         // stage("deploy") {
         //     steps {
         //         script {
