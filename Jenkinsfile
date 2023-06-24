@@ -6,7 +6,7 @@ pipeline {
         maven 'Maven'
     }
     stages {
-        /*
+        
         stage('increment version'){
             steps{
                 script{
@@ -45,7 +45,22 @@ pipeline {
                 }   
             }
         }
-        */
+
+        stage("deploy") {
+            steps {
+                script {
+                    echo 'deploying docker image to EC2 ...'
+                    def dockerCmd = "docker run -p 8081:8081 muktagurung/recipe-ingredient-helper:${IMAGE_NAME}"
+                    // def dockerCmd = "sudo docker run -p 8081:8081 muktagurung/recipe-ingredient-helper:2.6.6-28"
+                    
+                    sshagent(['ec2-server-key']) {
+                        // sh "ssh -o StrictHostKeyChecking=no ec2-user@13.54.32.183 ${dockerCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.27.173.145 ${dockerCmd}"
+                    }
+                }
+            }
+        }
+        
         // stage("deploy") {
         //     steps {
         //         script {
@@ -84,23 +99,6 @@ pipeline {
             }
         }
 */
-
-        stage("deploy") {
-            steps {
-                script {
-                    echo 'deploying docker image to EC2 ...'
-                    // echo "image name: ----- muktagurung/recipe-ingredient-helper:2.6.6-28"
-                    // def dockerCmd = "docker run -p 8081:8081 muktagurung/demo-app:${IMAGE_NAME}"
-                    def dockerCmd = "sudo docker run -p 8081:8081 muktagurung/recipe-ingredient-helper:2.6.6-28"
-                    
-                    sshagent(['ec2-server-key']) {
-                        // sh "ssh -o StrictHostKeyChecking=no ec2-user@13.54.32.183 ${dockerCmd}"
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.27.173.145 ${dockerCmd}"
-                    }
-                }
-            }
-        }
-
         
     }   
 }
