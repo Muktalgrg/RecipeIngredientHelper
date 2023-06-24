@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     echo 'deploying docker image to EC2 ...'
-                    def dockerCmd = "docker run -p 8081:8081 muktagurung/recipe-ingredient-helper:${IMAGE_NAME}"
+                    def dockerCmd = "docker run -p 8081:8081 -d muktagurung/recipe-ingredient-helper:${IMAGE_NAME}"
                     // def dockerCmd = "sudo docker run -p 8081:8081 muktagurung/recipe-ingredient-helper:2.6.6-28"
                     
                     sshagent(['ec2-server-key']) {
