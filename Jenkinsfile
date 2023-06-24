@@ -6,7 +6,7 @@ pipeline {
         maven 'Maven'
     }
     stages {
-        
+        /*
         stage('increment version'){
             steps{
                 script{
@@ -45,7 +45,7 @@ pipeline {
                 }   
             }
         }
-        
+        */
         // stage("deploy") {
         //     steps {
         //         script {
@@ -84,23 +84,23 @@ pipeline {
             }
         }
 */
-/*
+
         stage("deploy") {
             steps {
                 script {
                     echo 'deploying docker image to EC2 ...'
-                    // echo "image name: ----- ${IMAGE_NAME}"
-                    def dockerCmd = "docker run -p 3080:3080 -d muktagurung/demo-app:${IMAGE_NAME}"
-                    // def dockerCmd = "docker run -p 3080:3080 -d muktagurung/demo-app:1.1.50-30"
+                    // echo "image name: ----- muktagurung/recipe-ingredient-helper:2.6.6-28"
+                    // def dockerCmd = "docker run -p 8081:8081 muktagurung/demo-app:${IMAGE_NAME}"
+                    def dockerCmd = "docker run -p 8081:8081 muktagurung/recipe-ingredient-helper:2.6.6-28"
                     
                     sshagent(['ec2-server-key']) {
                         // sh "ssh -o StrictHostKeyChecking=no ec2-user@13.54.32.183 ${dockerCmd}"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@13.239.11.39 ${dockerCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.27.173.145${dockerCmd}"
                     }
                 }
             }
         }
 
-        */
+        
     }   
 }

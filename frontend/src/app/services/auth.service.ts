@@ -9,8 +9,9 @@ import { LoginRequest } from '../common/login-request';
 })
 export class AuthService {
 
-  // ROOT_URL:String = 'http://recipeingredienthelper-env.eba-kmynniwm.ap-southeast-2.elasticbeanstalk.com/';
-  ROOT_URL:String = 'http://localhost:8080/';
+  ROOT_URL:String = 'http://ec2-3-27-173-145.ap-southeast-2.compute.amazonaws.com:8081/';
+  
+  // ROOT_URL:String = 'http://localhost:8080/';
 
   private AUTH_API = this.ROOT_URL+'rih/api/auth';
   private httpOptions = {
